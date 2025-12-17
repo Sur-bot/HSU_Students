@@ -1,0 +1,68 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+// Async thunk để gọi API login
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async ({ username, password }, thunkAPI) => {
+    try {
+      const response = await fetch("http://localhost:3000/api/login", { 
+        // Android emulator dùng 10.0.2.2 thay cho localhost
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        return thunkAPI.rejectWithValue(data.error);
+      }
+
+      // data = { token, user }
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState: {
+    token: null,
+    role: null,
+    user: null,
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    logout: (state) => {
+      state.token = null;
+      state.role = null;
+      state.user = null;
+      state.error = null;
+      state.loading = false;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;          // user object
+        state.token = action.payload.token;        // token JWT
+        state.role = action.payload.user.role;     // role: Admin / GiangVien / SinhVien
+        state.error = null;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Đăng nhập thất bại";
+      });
+  },
+});
+
+export const { logout } = authSlice.actions;
+export default authSlice.reducer;
