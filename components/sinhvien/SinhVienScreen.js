@@ -9,12 +9,14 @@ import {
   Alert,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function SinhVienScreen() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [activeTab, setActiveTab] = useState("home");
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -57,8 +59,6 @@ export default function SinhVienScreen() {
           style={styles.content}
           contentContainerStyle={styles.contentScroll}
         >
-          {/* (Optional alert omitted as requested) */}
-          {/* Featured actions */}
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Tính năng yêu thích</Text>
@@ -121,7 +121,10 @@ export default function SinhVienScreen() {
                 <Text style={styles.gridLabel}>Học phí</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.gridItem}>
+              <TouchableOpacity
+                style={styles.gridItem}
+                onPress={() => navigation.navigate("DiemSinhVien")}
+              >
                 <View style={styles.gridIconBox}>
                   <MaterialCommunityIcons
                     name="chart-bar"
@@ -132,15 +135,17 @@ export default function SinhVienScreen() {
                 <Text style={styles.gridLabel}>Điểm</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.gridItem}>
+              <TouchableOpacity style={styles.gridItem}
+              onPress={() => navigation.navigate("DanhSachMonHoc")}
+              >
                 <View style={styles.gridIconBox}>
                   <MaterialCommunityIcons
-                    name="headphones"
+                    name="clipboard-list"
                     size={26}
                     color="#0a57a1"
                   />
                 </View>
-                <Text style={styles.gridLabel}>Sinh viên góp ý</Text>
+                <Text style={styles.gridLabel}>Danh sách môn học</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.gridItem}>
@@ -155,7 +160,7 @@ export default function SinhVienScreen() {
               </TouchableOpacity>
             </View>
           </View>
-         
+
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Sự kiện sắp tới</Text>

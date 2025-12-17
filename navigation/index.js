@@ -8,6 +8,9 @@ import AdminScreen from "../components/admin/AdminScreen";
 import GiangVienScreen from "../components/giangvien/GiangVienScreen";
 import SinhVienScreen from "../components/sinhvien/SinhVienScreen";
 
+import DiemSinhVienScreen from "../components/sinhvien/routes/DiemSinhVienScreen";
+import DanhSachMonHocScreen from "../components/sinhvien/routes/DanhSachMonHocScreen";
+
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
@@ -16,16 +19,27 @@ export default function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {!token && <Stack.Screen name="Login" component={LoginScreen} />}
-        {token && role === "Admin" && (
+        {!token ? (
+          <Stack.Screen name="Login" component={LoginScreen} />
+        ) : role === "Admin" ? (
           <Stack.Screen name="Admin" component={AdminScreen} />
-        )}
-        {token && role === "GiangVien" && (
+        ) : role === "GiangVien" ? (
           <Stack.Screen name="GiangVien" component={GiangVienScreen} />
-        )}
-        {token && role === "SinhVien" && (
-          <Stack.Screen name="SinhVien" component={SinhVienScreen} />
-        )}
+        ) : role === "SinhVien" ? (
+          <>
+            <Stack.Screen name="SinhVien" component={SinhVienScreen} />
+            <Stack.Screen
+              name="DiemSinhVien"
+              component={DiemSinhVienScreen}
+              options={{ headerShown: true, title: "Bảng điểm" }}
+            />
+            <Stack.Screen
+              name="DanhSachMonHoc"
+              component={DanhSachMonHocScreen}
+              options={{ headerShown: true, title: "Danh sách môn học" }}
+            />
+          </>
+        ) : null}
       </Stack.Navigator>
     </NavigationContainer>
   );
