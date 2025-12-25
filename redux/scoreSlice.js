@@ -6,7 +6,7 @@ export const fetchScoresByStudent = createAsyncThunk(
   async (MaSV, thunkAPI) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/diem/sinhvien/${MaSV}`
+        `http://172.20.10.5:3000/api/diem/sinhvien/${MaSV}`
       );
 
       const data = await response.json();

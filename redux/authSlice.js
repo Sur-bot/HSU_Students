@@ -5,7 +5,7 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ username, password }, thunkAPI) => {
     try {
-      const response = await fetch("http://localhost:3000/api/login", { 
+      const response = await fetch("http://172.20.10.5:3000/api/login", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -36,6 +36,7 @@ const authSlice = createSlice({
   },
   reducers: {
     logout: (state) => {
+      console.log("LOGOUT");
       state.token = null;
       state.role = null;
       state.user = null;
@@ -51,9 +52,9 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;          // user object
-        state.token = action.payload.token;        // token JWT
-        state.role = action.payload.user.role;     // role: Admin / GiangVien / SinhVien
+        state.user = action.payload.user;      
+        state.token = action.payload.token;      
+        state.role = action.payload.user.role;     
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {

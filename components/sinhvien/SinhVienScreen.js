@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   View,
   Text,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SinhVienScreen() {
   const dispatch = useDispatch();
@@ -21,16 +21,19 @@ export default function SinhVienScreen() {
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
-        {/* Header profile card */}
         <View style={styles.header}>
           <View style={styles.profileCard}>
             <View style={styles.profileIcon}>
               <MaterialCommunityIcons name="account" size={28} color="#fff" />
             </View>
             <View style={styles.profileInfo}>
-              <Text style={styles.profileName}>
-                {user?.username || "Sinh viên"}
-              </Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("SuaThongTin")}
+              >
+                <Text style={styles.profileName}>
+                  {user?.hoTen || "Sinh viên"}
+                </Text>
+              </TouchableOpacity>
               <View style={styles.profileTagsRow}>
                 <View style={styles.tagRow}>
                   <MaterialCommunityIcons
@@ -66,7 +69,10 @@ export default function SinhVienScreen() {
             </View>
 
             <View style={styles.grid}>
-              <TouchableOpacity style={styles.gridItem}>
+              <TouchableOpacity
+                style={styles.gridItem}
+                onPress={() => navigation.navigate("ThoiKhoaBieu")}
+              >
                 <View style={styles.gridIconBox}>
                   <MaterialCommunityIcons
                     name="calendar"
@@ -135,8 +141,9 @@ export default function SinhVienScreen() {
                 <Text style={styles.gridLabel}>Điểm</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.gridItem}
-              onPress={() => navigation.navigate("DanhSachMonHoc")}
+              <TouchableOpacity
+                style={styles.gridItem}
+                onPress={() => navigation.navigate("DanhSachMonHoc")}
               >
                 <View style={styles.gridIconBox}>
                   <MaterialCommunityIcons
