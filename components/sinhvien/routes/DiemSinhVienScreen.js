@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { View, Text, FlatList, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchScoresByStudent } from "../../../redux/scoreSlice";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DiemSinhVienScreen() {
   const dispatch = useDispatch();
