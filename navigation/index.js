@@ -16,6 +16,8 @@ import DanhSachLopGiangVienScreen from "../components/giangvien/routes/DanhSachL
 import DanhSachSinhVienScreen from "../components/giangvien/routes/DanhSachSinhVienScreen";
 import LichDayGiangVienScreen from "../components/giangvien/routes/LichDayGiangVienScreen";
 import MonHocGiangVienScreen from "../components/giangvien/routes/MonHocGiangVienScreen";
+import ChinhSuaThongTinScreen  from "../components/giangvien/routes/ChinhSuaThongTinScreen ";
+import DiemDanhSinhVienScreen from "../components/giangvien/routes/DiemDanhSinhVienScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +53,16 @@ export default function AppNavigator() {
               name="MonHocGiangVien"
               component={MonHocGiangVienScreen}
               options={{ headerShown: true, title: "Môn học giảng viên" }}
+            />
+            <Stack.Screen
+              name="ChinhSuaThongTin"
+              component={ChinhSuaThongTinScreen}
+              options={{ headerShown: true, title: "Chỉnh sửa thông tin" }}
+            />
+            <Stack.Screen
+              name="DiemDanhSinhVien"
+              component={DiemDanhSinhVienScreen}
+              options={{ headerShown: true, title: "Điểm danh sinh viên" }}
             />
           </>
         ) : role === "SinhVien" ? (

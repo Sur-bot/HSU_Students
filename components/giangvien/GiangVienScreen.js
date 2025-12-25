@@ -44,10 +44,13 @@ export default function GiangVienScreen() {
             </View>
 
             <View style={styles.profileInfo}>
-              <Text style={styles.profileName}>
-                {user?.hoTen || user?.username || "Giảng viên"}
-              </Text>
-
+              <TouchableOpacity
+                onPress={() => navigation.navigate("ChinhSuaThongTin")}
+              >
+                <Text style={styles.profileName}>
+                  {user?.hoTen || user?.username || "Giảng viên"}
+                </Text>
+              </TouchableOpacity>
               <View style={styles.profileTagsRow}>
                 <View style={styles.tagRow}>
                   <MaterialCommunityIcons

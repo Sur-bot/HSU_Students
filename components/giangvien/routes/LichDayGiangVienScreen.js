@@ -1,12 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native"; // Thêm TouchableOpacity
 import { Calendar } from "react-native-calendars";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLichDayGiangVien } from "../../../redux/lectorRedux/lichDayGiangVienSlice";
 import dayjs from "dayjs";
+import { useNavigation } from "@react-navigation/native";
 
 export default function LichDayGiangVienScreen() {
   const dispatch = useDispatch();
+  const navigation = useNavigation(); // Khởi tạo navigation
   const { lichDay } = useSelector((state) => state.lichDayGiangVien);
 
   const [selectedDate, setSelectedDate] = useState(
@@ -41,34 +49,27 @@ export default function LichDayGiangVienScreen() {
 
       for (let i = 0; i < numberOfWeeks; i++) {
         let date = dayjs().day(thu).add(i, "week");
-
         if (date.isBefore(dayjs(), "day")) {
           date = date.add(1, "week");
         }
-
         const dateStr = date.format("YYYY-MM-DD");
-
         if (!map[dateStr]) map[dateStr] = [];
         map[dateStr].push(item);
       }
     });
-
     return map;
   }, [lichDay]);
 
   const markedDates = useMemo(() => {
     const marks = {};
-
     Object.keys(lichTheoNgay).forEach((date) => {
       marks[date] = { marked: true, dotColor: "#1976d2" };
     });
-
     marks[selectedDate] = {
       ...(marks[selectedDate] || {}),
       selected: true,
       selectedColor: "#1976d2",
     };
-
     return marks;
   }, [lichTheoNgay, selectedDate]);
 
@@ -98,15 +99,29 @@ export default function LichDayGiangVienScreen() {
           const endTime = TIET_THOI_GIAN[endTiet].split(" - ")[1];
 
           return (
-            <View style={styles.card}>
-              <Text style={styles.time}>
-                {startTime} - {endTime}
-              </Text>
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => {
+                navigation.navigate("DiemDanhSinhVien", {
+                  maTKB: item.MaTKB,
+                  tenMH: item.TenMH,
+                });
+              }}
+            >
+              <View style={styles.cardHeader}>
+                <Text style={styles.time}>
+                  {startTime} - {endTime}
+                </Text>
+                <View style={styles.attendanceTag}>
+                  <Text style={styles.attendanceText}>Điểm danh</Text>
+                </View>
+              </View>
+
               <Text style={styles.subject}>{item.TenMH}</Text>
-              <Text>
+              <Text style={styles.details}>
                 {item.TenLop} • Phòng {item.PhongHoc}
               </Text>
-            </View>
+            </TouchableOpacity>
           );
         }}
         ListEmptyComponent={<Text style={styles.empty}>Không có lịch dạy</Text>}
@@ -117,35 +132,39 @@ export default function LichDayGiangVienScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
-
-  dateTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    margin: 12,
-  },
-
+  dateTitle: { fontSize: 16, fontWeight: "700", margin: 12 },
   card: {
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#fff",
     marginHorizontal: 12,
     marginVertical: 6,
-    padding: 12,
-    borderRadius: 10,
+    padding: 15,
+    borderRadius: 12,
+    // Thêm đổ bóng cho Card nhìn chuyên nghiệp hơn
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
-
-  time: {
-    color: "#1976d2",
-    fontWeight: "700",
+  cardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-
+  time: { color: "#1976d2", fontWeight: "700" },
+  attendanceTag: {
+    backgroundColor: "#e3f2fd",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+  },
+  attendanceText: { color: "#1976d2", fontSize: 12, fontWeight: "600" },
   subject: {
-    fontSize: 15,
-    fontWeight: "600",
-    marginVertical: 4,
+    fontSize: 16,
+    fontWeight: "bold",
+    marginVertical: 6,
+    color: "#333",
   },
-
-  empty: {
-    textAlign: "center",
-    marginTop: 30,
-    color: "#888",
-  },
+  details: { color: "#666", fontSize: 14 },
+  empty: { textAlign: "center", marginTop: 30, color: "#888" },
 });

@@ -8,6 +8,8 @@ import lopGiangVienReducer from "./lectorRedux/lopGiangVienSlice";
 import sinhVienGiangVienReducer from "./lectorRedux/sinhVienGiangVienSlice";
 import lichDayGiangVienReducer from "./lectorRedux/lichDayGiangVienSlice";
 import monHocGiangVienReducer from "./lectorRedux/monHocGiangVienSlice";
+import giangVienInfoReducer from "./lectorRedux/giangVienInfoSlice";
+import attendanceReducer from "./lectorRedux/attendanceSlice";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ const store = configureStore({
     sinhVienGiangVien: sinhVienGiangVienReducer,
     lichDayGiangVien: lichDayGiangVienReducer,
     monHocGiangVien: monHocGiangVienReducer,
+    giangVienInfo: giangVienInfoReducer,
+    attendance: attendanceReducer,
   },
 });
 
