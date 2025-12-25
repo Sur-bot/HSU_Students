@@ -6,7 +6,7 @@ export const fetchSubjectsByStudent = createAsyncThunk(
   async (MaSV, thunkAPI) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/monhoc/sinhvien/${MaSV}`
+        `http://192.168.100.156:3000/api/monhoc/sinhvien/${MaSV}`
       );
 
       const data = await response.json();

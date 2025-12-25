@@ -24,16 +24,18 @@ import GiangVienModal from "./modals/GiangvienModal";
 import MonHocModal from "./modals/MonhocModal";
 import TaiKhoanModal from "./modals/TaikhoanModal";
 import AdminScoreModal from "./modals/AdminScoreModal";
+import DuyetDiemModal from "./modals/DuyetdiemModal";
+import ThongBaoModal from "./modals/ThongBaoModal";
 
 export default function AdminScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
-  // ===== LOAD DATA (QUAN TRỌNG) =====
+  // ===== LOAD DATA =====
   useEffect(() => {
     dispatch(fetchMonHoc());
-   
+    dispatch(fetchLop());
   }, [dispatch]);
 
   // ===== STATE MODAL =====
@@ -43,6 +45,8 @@ export default function AdminScreen() {
   const [showMH, setShowMH] = useState(false);
   const [showTK, setShowTK] = useState(false);
   const [showScore, setShowScore] = useState(false);
+  const [showDuyetDiem, setShowDuyetDiem] = useState(false);
+  const [showThongBao, setShowThongBao] = useState(false);
 
   // ===== DATA FROM STORE =====
   const monHocList = useSelector((state) => state.monHoc.list);
@@ -182,6 +186,37 @@ export default function AdminScreen() {
                 </View>
                 <Text style={styles.gridLabel}>Quản lý điểm</Text>
               </TouchableOpacity>
+
+              {/* ===== DUYỆT ĐIỂM ===== */}
+              <TouchableOpacity
+                style={styles.gridItem}
+                onPress={() => setShowDuyetDiem(true)}
+              >
+                <View style={styles.gridIconBox}>
+                  <MaterialCommunityIcons
+                    name="check-decagram"
+                    size={26}
+                    color="#0a57a1"
+                  />
+                </View>
+                <Text style={styles.gridLabel}>Duyệt điểm</Text>
+              </TouchableOpacity>
+
+              {/* ===== THÔNG BÁO ===== */}
+              <TouchableOpacity
+                style={styles.gridItem}
+                onPress={() => setShowThongBao(true)}
+              >
+                <View style={styles.gridIconBox}>
+                  <MaterialCommunityIcons
+                    name="bell"
+                    size={26}
+                    color="#0a57a1"
+                  />
+                </View>
+                <Text style={styles.gridLabel}>Thông báo</Text>
+              </TouchableOpacity>
+
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => setShowTK(true)}
@@ -195,10 +230,7 @@ export default function AdminScreen() {
                 </View>
                 <Text style={styles.gridLabel}>Tài khoản</Text>
               </TouchableOpacity>
-      
             </View>
-
-            
           </View>
         </ScrollView>
 
@@ -208,13 +240,20 @@ export default function AdminScreen() {
         <GiangVienModal visible={showGV} onClose={() => setShowGV(false)} />
         <MonHocModal visible={showMH} onClose={() => setShowMH(false)} />
         <TaiKhoanModal visible={showTK} onClose={() => setShowTK(false)} />
-
-        {/* ===== MODAL QUẢN LÝ ĐIỂM ===== */}
         <AdminScoreModal
           visible={showScore}
           monHocList={monHocList}
           lopList={lopList}
           onClose={() => setShowScore(false)}
+        />
+        <DuyetDiemModal
+          visible={showDuyetDiem}
+          onClose={() => setShowDuyetDiem(false)}
+        />
+        <ThongBaoModal
+          visible={showThongBao}
+          onClose={() => setShowThongBao(false)}
+          currentUserId="HSU"
         />
       </View>
     </SafeAreaView>
@@ -288,11 +327,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#2c3e50",
     fontWeight: "600",
-  },
-
-  singleRow: {
-    paddingHorizontal: 16,
-    marginTop: 10,
-    alignItems: "flex-start",
   },
 });

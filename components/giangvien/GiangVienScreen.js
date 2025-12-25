@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -12,11 +12,12 @@ import { logout } from "../../redux/authSlice";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import NhapDiemModal from "./routes/NhapdiemModal";
 export default function GiangVienScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const user = useSelector((state) => state.auth.user);
+  const [showNhapDiem, setShowNhapDiem] = useState(false);
 
   const handleLogout = () => {
     Alert.alert("Đăng xuất", "Bạn có chắc chắn muốn đăng xuất?", [
@@ -97,7 +98,7 @@ export default function GiangVienScreen() {
               <Feature
                 icon="clipboard-edit"
                 label="Nhập điểm"
-                onPress={() => navigation.navigate("NhapDiem")}
+                onPress={() => setShowNhapDiem(true)}
               />
               <Feature
                 icon="clipboard-list"
@@ -120,8 +121,16 @@ export default function GiangVienScreen() {
           </TouchableOpacity>
         </ScrollView>
       </View>
+      <NhapDiemModal
+        visible={showNhapDiem}
+        onClose={() => setShowNhapDiem(false)}
+        MaGV={user.username.toUpperCase()}
+      />
     </SafeAreaView>
+
+
   );
+
 }
 
 /* ===== Feature item ===== */

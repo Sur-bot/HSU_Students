@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API = 'http://localhost:3000/api/giangvien';
+const API = 'http://192.168.100.156:3000/api/giangvien';
 
 export const fetchGiangVien = createAsyncThunk('gv/fetch', async () => {
   const res = await fetch(API);

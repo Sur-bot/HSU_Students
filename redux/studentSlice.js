@@ -5,7 +5,7 @@ export const fetchStudentInfo = createAsyncThunk(
   "student/fetchStudentInfo",
   async (maSV, thunkAPI) => {
     try {
-      const res = await fetch(`http://172.20.10.5:3000/api/sinhvien/${maSV}`);
+      const res = await fetch(`http://192.168.100.156:3000/api/sinhvien/${maSV}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       return data;

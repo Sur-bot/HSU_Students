@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API = 'http://localhost:3000/api/lop';
+const API = 'http://192.168.100.156:3000/api/lop';
 
 /* ===== CŨ – GIỮ NGUYÊN ===== */
 export const fetchLop = createAsyncThunk('lop/fetch', async () => {

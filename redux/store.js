@@ -14,7 +14,8 @@ import giangVienReducer from './slices/giangvienSlice';
 import monHocReducer from './slices/monhocSlice';
 import taikhoanReducer from './slices/taikhoanSlice';
 import adminScoreReducer from "./slices/adminScoreSlice";
-
+import yeuCauDiemReducer from "./slices/yeuCauDiemSlice";
+import thongBaoReducer from "./slices/thongbaoSlice";
 export const mystore = configureStore({
     reducer: {
         auth: authReducer,
@@ -31,7 +32,9 @@ export const mystore = configureStore({
         giangVien: giangVienReducer,
         monHoc: monHocReducer,
         taikhoan: taikhoanReducer,
-        adminScore: adminScoreReducer
+        adminScore: adminScoreReducer,
+        yeuCauDiem: yeuCauDiemReducer,
+        thongBao: thongBaoReducer,
     },
 });
 
