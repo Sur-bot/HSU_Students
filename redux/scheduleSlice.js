@@ -6,7 +6,7 @@ export const fetchScheduleByStudent = createAsyncThunk(
   async (MaSV, thunkAPI) => {
     try {
       const response = await fetch(
-        `http://172.20.10.5:3000/api/thoikhoabieu/sinhvien/${MaSV}`
+        `http://192.168.100.156:3000/api/thoikhoabieu/sinhvien/${MaSV}`
       );
       const data = await response.json();
 

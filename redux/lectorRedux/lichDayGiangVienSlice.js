@@ -12,7 +12,7 @@ export const fetchLichDayGiangVien = createAsyncThunk(
       }
 
       const response = await fetch(
-        `http://172.20.10.5:3000/api/giangvien/lichday/${maGV}`
+        `http://192.168.100.156:3000/api/giangvien/lichday/${maGV}`
       );
 
       const data = await response.json();

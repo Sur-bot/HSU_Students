@@ -5,7 +5,7 @@ export const fetchMonHocGiangVien = createAsyncThunk(
   'giangVien/fetchMonHocGiangVien',
   async (MaGV, thunkAPI) => {
     try {
-      const response = await fetch(`http://172.20.10.5:3000/api/monhoc/giangvien/${MaGV}`);
+      const response = await fetch(`http://192.168.100.156:3000/api/monhoc/giangvien/${MaGV}`);
       if (!response.ok) {
         const errorData = await response.json();
         return thunkAPI.rejectWithValue(errorData);
