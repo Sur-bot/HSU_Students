@@ -5,7 +5,7 @@ export const fetchGiangVienInfo = createAsyncThunk(
   "giangVienInfo/fetchInfo",
   async (MaGV, thunkAPI) => {
     try {
-      const response = await fetch(`http://172.20.10.5:3000/api/giangvien/${MaGV}`);
+      const response = await fetch(`http://10.102.70.202:3000/api/giangvien/${MaGV}`);
       const data = await response.json();
       if (!response.ok) {
         return thunkAPI.rejectWithValue(data.error || "Không thể lấy thông tin");

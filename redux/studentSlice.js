@@ -5,7 +5,7 @@ export const fetchStudentInfo = createAsyncThunk(
   "student/fetchStudentInfo",
   async (maSV, thunkAPI) => {
     try {
-      const res = await fetch(`http://192.168.100.156:3000/api/sinhvien/${maSV}`);
+      const res = await fetch(`http://10.102.70.202:3000/api/sinhvien/${maSV}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       return data;
@@ -22,7 +22,7 @@ export const updateStudentInfo = createAsyncThunk(
     try {
       const { studentInfo } = thunkAPI.getState().student;
 
-      const res = await fetch(`http://172.20.10.5:3000/api/sinhvien/${maSV}/profile`, {
+      const res = await fetch(`http://10.102.70.202:3000/api/sinhvien/${maSV}/profile`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

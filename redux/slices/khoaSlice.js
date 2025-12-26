@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API = 'http://192.168.100.156:3000/api/khoa';
+const API = 'http://10.102.70.202:3000/api/khoa';
 
 export const fetchKhoa = createAsyncThunk('khoa/fetch', async () => {
   const res = await fetch(API);

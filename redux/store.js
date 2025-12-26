@@ -9,8 +9,9 @@ import lichDayGiangVienReducer from "./lectorRedux/lichDayGiangVienSlice";
 import monHocGiangVienReducer from "./lectorRedux/monHocGiangVienSlice";
 import giangVienInfoReducer from "./lectorRedux/giangVienInfoSlice";
 import attendanceReducer from "./lectorRedux/attendanceSlice";
+import subjectReducer from "./subjectSlice";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     auth: authReducer,
     score: scoreReducer,
@@ -25,4 +26,5 @@ const store = configureStore({
     attendance: attendanceReducer,
   },
 });
+
 

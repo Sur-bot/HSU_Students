@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const API = "http://192.168.100.156:3000/api/thongbao";
+const API = "http://10.102.70.202:3000/api/thongbao";
 
 // GET tất cả thông báo
 export const fetchThongBao = createAsyncThunk(

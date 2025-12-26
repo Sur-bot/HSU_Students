@@ -86,7 +86,7 @@ export default function AppNavigator() {
             <Stack.Screen
               name="SuaThongTin"
               component={EditStudentProfile}
-              options={{ headerShown: true }}
+              options={{ headerShown: true, title: "Sửa thông tin" }}
             />
           </>
         ) : null}

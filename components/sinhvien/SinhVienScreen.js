@@ -11,12 +11,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { logout } from "../../redux/authSlice";
 
 export default function SinhVienScreen() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [activeTab, setActiveTab] = useState("home");
   const navigation = useNavigation();
+
+  const handleLogout = () => {
+    Alert.alert("Đăng xuất", "Bạn có chắc chắn muốn đăng xuất?", [
+      { text: "Hủy", style: "cancel" },
+      {
+        text: "Đăng xuất",
+        style: "destructive",
+        onPress: () => dispatch(logout()),
+      },
+    ]);
+  };
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -223,6 +235,11 @@ export default function SinhVienScreen() {
               </View>
             </ScrollView>
           </View>
+
+          <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
+            <MaterialCommunityIcons name="logout" size={20} color="#fff" />
+            <Text style={styles.logoutText}>Đăng xuất</Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -385,4 +402,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   badgeText: { color: "#fff", fontSize: 10, fontWeight: "700" },
+  logoutBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 16,
+    marginTop: 20,
+    paddingVertical: 12,
+    borderRadius: 8,
+    backgroundColor: "#e74c3c",
+  },
+  logoutText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "700",
+    marginLeft: 6,
+  },
 });

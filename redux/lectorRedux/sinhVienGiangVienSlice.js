@@ -14,7 +14,7 @@ export const fetchSinhVienGiangVien = createAsyncThunk(
       }
 
       const response = await fetch(
-        `http://192.168.100.156:3000/api/giangvien/sinhvien/${maGV}`
+        `http://10.102.70.202:3000/api/giangvien/sinhvien/${maGV}`
       );
 
       const data = await response.json();

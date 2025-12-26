@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Địa chỉ API cơ sở (đã sửa theo IP của bạn)
-const API_URL = "http://172.20.10.5:3000/api/diemdanh";
+const API_URL = "http://10.102.70.202:3000/api/diemdanh";
 
 // 1. Action Lấy danh sách sinh viên theo tiết học (MaTKB)
 // Cấu trúc giống hệt fetchGiangVienInfo

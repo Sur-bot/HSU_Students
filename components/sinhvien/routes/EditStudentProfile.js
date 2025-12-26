@@ -64,8 +64,6 @@ export default function EditStudentProfile() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Thông tin sinh viên</Text>
-
-      {/* KHÔNG CHO SỬA */}
       <TextInput
         value={studentInfo.HoTen || ""}
         editable={false}
